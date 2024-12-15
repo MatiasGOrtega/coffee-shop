@@ -1,12 +1,6 @@
-'use client'
+"use client";
 import { useRouter } from "next/navigation";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "./ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
 import { Card, CardContent } from "./ui/card";
 
 export const dataCarouselBanner = [
@@ -42,13 +36,17 @@ function CarouselBanner() {
   const router = useRouter();
 
   return (
-    <div className="bg-gray-200 dark:bg-primary">
-      <Carousel className="w-full max-w-4xl mx-auto">
+    <div className="bg-gray-200 dark:bg-primary text-center">
+      <Carousel className="mx-auto w-full max-w-4xl">
         <CarouselContent>
           {dataCarouselBanner.map((data) => (
-            <CarouselItem key={data.id} onClick={() => router.push(data.link)} className="cursor-pointer">
+            <CarouselItem
+              key={data.id}
+              onClick={() => router.push(data.link)}
+              className="cursor-pointer"
+            >
               <div>
-                <Card className="shadow-none border-none bg-transparent ">
+                <Card className="border-none bg-transparent shadow-none">
                   <CardContent>
                     <p>{data.title} 2</p>
                   </CardContent>
@@ -57,8 +55,6 @@ function CarouselBanner() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
       </Carousel>
     </div>
   );
