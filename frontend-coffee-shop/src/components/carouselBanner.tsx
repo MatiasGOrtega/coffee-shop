@@ -36,7 +36,7 @@ function CarouselBanner() {
   const router = useRouter();
 
   return (
-    <div className="bg-gray-200 dark:bg-primary text-center">
+    <div className="bg-black bg-opacity-5 dark:bg-primary text-center">
       <Carousel className="mx-auto w-full max-w-4xl">
         <CarouselContent>
           {dataCarouselBanner.map((data) => (
@@ -48,7 +48,8 @@ function CarouselBanner() {
               <div>
                 <Card className="border-none bg-transparent shadow-none">
                   <CardContent>
-                    <p>{data.title} 2</p>
+                    <p className="sm:text-lg text-wrap dark:text-secondary">{data.title}</p>
+                    <p className="text-xs sm:text-sm text-wrap dark:text-secondary">{data.descripcion}</p>
                   </CardContent>
                 </Card>
               </div>

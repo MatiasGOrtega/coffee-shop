@@ -44,9 +44,10 @@ function FeaturedProducts() {
                         className="h-56 w-56 object-cover"
                         alt="Image featured"
                       />
-                      <div className="absolute bottom-0 w-full opacity-0 transition duration-200 group-hover:opacity-100">
+                      <div className="absolute bottom-0 w-full sm:opacity-0 transition duration-200 group-hover:opacity-100">
                         <div className="flex justify-end gap-x-5">
                           <ButtonExpand
+                            className="block"
                             onClick={() => handleClick(product.slug)}
                           />
                           <ButtonShoppingCart
@@ -73,8 +74,8 @@ function FeaturedProducts() {
               );
             })}
         </CarouselContent>
-        <CarouselPrevious className="hidden sm:flex"/>
-        <CarouselNext className="hidden sm:flex"/>
+        <CarouselPrevious className="hidden sm:flex" />
+        <CarouselNext className="hidden sm:flex" />
       </Carousel>
     </div>
   );
