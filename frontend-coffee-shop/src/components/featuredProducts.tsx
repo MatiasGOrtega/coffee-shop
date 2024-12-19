@@ -15,10 +15,13 @@ import { ProductType } from "@/types/product";
 import { Card, CardContent } from "./ui/card";
 import { ButtonExpand, ButtonShoppingCart } from "./buttons";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/hooks/useCart";
 
 function FeaturedProducts() {
   const { loading, result }: ResponseType = useGetFeaturedProducts();
   const router = useRouter();
+
+  const { addProduct } = useCart();
 
   const handleClick = (slug: string) => {
     router.push(`/product/${slug}`);
@@ -44,14 +47,14 @@ function FeaturedProducts() {
                         className="h-56 w-56 object-cover"
                         alt="Image featured"
                       />
-                      <div className="absolute bottom-0 w-full sm:opacity-0 transition duration-200 group-hover:opacity-100">
+                      <div className="absolute bottom-0 w-full transition duration-200 group-hover:opacity-100 sm:opacity-0">
                         <div className="flex justify-end gap-x-5">
                           <ButtonExpand
                             className="block"
                             onClick={() => handleClick(product.slug)}
                           />
                           <ButtonShoppingCart
-                            onClick={() => console.log("Add Item")}
+                            onClick={() => addProduct(product)}
                           />
                         </div>
                       </div>

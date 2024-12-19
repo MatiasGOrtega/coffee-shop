@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { useCart } from '@/hooks/useCart'
 import { formatPrice } from '@/lib/formatPrice'
 import { ProductType } from '@/types/product'
 import { Heart } from 'lucide-react'
@@ -12,6 +13,8 @@ interface InfoProductProps {
 function InfoProduct({ product }: InfoProductProps) {
   
   const productPrice = formatPrice(product.productPrice)
+
+  const { addProduct } = useCart()
   
   return (
     <div className='px-6'>
@@ -31,7 +34,7 @@ function InfoProduct({ product }: InfoProductProps) {
       <Separator className='my-4'/>
       <p className='my-4 text-2xl'>{productPrice}</p>
       <div className='flex items-center gap-5'>
-        <Button className='w-1/2' onClick={()=> console.log("Comprar")}>Comprar</Button>
+        <Button className='w-1/2' onClick={()=> addProduct(product)}>Comprar</Button>
         <Heart size={24} strokeWidth={1} className='transition-colors cursor-pointer hover:fill-red-500 hover:stroke-red-500' onClick={()=>console.log("Agreagado a favoritos")}/>
       </div>
     </div>
