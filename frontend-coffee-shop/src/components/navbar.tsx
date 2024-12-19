@@ -40,7 +40,7 @@ function Navbar() {
           <ShoppingCart
             size={24}
             strokeWidth="1"
-            className="cursor-pointer"
+            className="cursor-pointer transition-colors hover:bg-black hover:stroke-white"
             onClick={handleCart}
           />
         ) : (
@@ -57,11 +57,11 @@ function Navbar() {
         <Heart
           size={24}
           strokeWidth="1"
-          className="cursor-pointer"
+          className="cursor-pointer transition-colors hover:fill-red-500 hover:stroke-red-500"
           onClick={handleFav}
         />
 
-        <User size={24} strokeWidth="1" className="cursor-pointer" />
+        <User size={24} strokeWidth="1" className="cursor-pointer transition-colors hover:bg-black hover:stroke-white rounded " />
 
         <ModeToggle />
       </div>
