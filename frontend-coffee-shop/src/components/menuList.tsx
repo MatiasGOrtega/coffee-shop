@@ -13,26 +13,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Cafe grano",
-    href: "/category/cafe-grano",
-    description: "Granos de cafe enteros para moler antes de su preparacion.",
-  },
-  {
-    title: "Cafe molido",
-    href: "/category/cafe-molido",
-    description:
-      "Cafe molido para preparar en cafetera italiana, de filtro o de prensa francesa.",
-  },
-  {
-    title: "Cafe en capsulas",
-    href: "/category/cafe-capsulas",
-    description:
-      "Cafe en capsulas para preparar en cafeteras de capsulas como Nespresso.",
-  },
-];
+import { cafeLinks } from "@/utils/dataCafeLinksCategory";
 
 export function MenuList() {
   return (
@@ -73,7 +54,7 @@ export function MenuList() {
           <NavigationMenuTrigger>Cafes</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[300px] gap-3 p-4 md:w-[400px] md:grid-cols-1 lg:w-[500px] ">
-              {components.map((component) => (
+              {cafeLinks.map((component) => (
                 <ListItem
                   key={component.title}
                   title={component.title}

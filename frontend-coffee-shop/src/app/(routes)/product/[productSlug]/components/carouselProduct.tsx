@@ -2,7 +2,10 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
+import ImageProduct from "@/components/shared/imageProduct";
 
 interface productImages {
   images: {
@@ -18,14 +21,15 @@ function CarouselProduct({ images }: productImages) {
         <CarouselContent>
           {images.map((image) => (
             <CarouselItem key={image.id}>
-              <img
-                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${image.url}`}
-                alt="product"
-                className="h-96 w-full rounded-lg object-cover"
-              />
+              <ImageProduct imageUrl={images} className="w-full h-full"/>
             </CarouselItem>
           ))}
         </CarouselContent>
+        <CarouselPrevious className="hidden sm:flex" />
+        <CarouselNext className="hidden sm:flex" />
+        <div className="py-2 text-center text-gray-500">
+          Deslizar para ver más imagenes
+        </div>
       </Carousel>
     </div>
   );

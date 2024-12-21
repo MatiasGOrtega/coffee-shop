@@ -5,7 +5,15 @@ import { formatPrice } from "@/lib/formatPrice";
 import { Button } from "@/components/ui/button";
 import { useFavorite } from "@/hooks/useFavorite";
 import { useCart } from "@/hooks/useCart";
-import { X } from "lucide-react";
+import Link from "next/link";
+import { Expand, X } from "lucide-react";
+import {
+  ButtonExpand,
+  ButtonRemove,
+  ButtonShoppingCart,
+} from "@/components/buttons";
+import ImageProduct from "@/components/shared/imageProduct";
+import ProductTags from "@/components/shared/productTags";
 
 interface FavoriteItemProps {
   product: ProductType;
@@ -17,7 +25,7 @@ function FavoriteItem({ product }: FavoriteItemProps) {
   const { addProduct } = useCart();
   const handleClick = (slug: string) => {
     router.push(`/product/${slug}`);
-  }
+  };
 
   const addToCheckout = () => {
     addProduct(product);
@@ -27,39 +35,34 @@ function FavoriteItem({ product }: FavoriteItemProps) {
   const productPrice = formatPrice(product.productPrice);
 
   return (
-    <li className="flex border-b py-6">
-      <div onClick={() => handleClick(product.slug)} className="cursor-pointer">
-        <img
-          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.productImage[0].url}`}
-          alt={product.productName}
-          className="h-24 w-24 overflow-hidden rounded-md sm:h-32 sm:w-32"
-        />
-      </div>
-      <div className="flex flex-1 justify-between px-6">
+    <li className="flex w-96 items-center border-b p-6">
+      <ImageProduct
+        imageUrl={product.productImage}
+        className="h-24 w-24 overflow-hidden rounded-md sm:h-32 sm:w-32"
+      />
+      <div className="flex flex-1 justify-between pl-6">
         <div>
-          <div>
-            <h2 className="text-lg font-bold">{product.productName}</h2>
-            <p className="font-bold">{productPrice}</p>
-            <div className="flex gap-1 text-sm">
-              <span className="rounded bg-black px-2 py-1 text-white dark:bg-white dark:text-black">
-                {product.productTest}
-              </span>
-              <span className="rounded bg-orange-500 px-2 py-1 text-white">
-                {product.productOrigin}
-              </span>
-            </div>
-            <Button onClick={() => addToCheckout()} className="mt-2">
-              Añadir al carrito
-            </Button>
+          <h2 className="text-lg font-bold">{product.productName}</h2>
+          <p className="font-bold">{productPrice}</p>
+          <div className="flex gap-1 text-sm">
+            <ProductTags
+              test={product.productTest}
+              origin={product.productOrigin}
+            />
           </div>
         </div>
-        <div className="flex items-center px-6">
-          <button
-            onClick={() => removeProductFavorite(product.id)}
-            className="rounded-full p-2 text-red-500 transition-colors hover:bg-red-500 hover:text-white shadow-md"
-          >
-            <X size={20} />
-          </button>
+        <div className="flex flex-col items-center gap-1">
+          <ButtonRemove onClick={() => removeProductFavorite(product.id)} />
+
+          <ButtonExpand
+            onClick={() => handleClick(product.slug)}
+            className="rounded-full p-2 shadow-md"
+          />
+
+          <ButtonShoppingCart
+            onClick={() => addToCheckout()}
+            className="rounded-full bg-primary p-2 text-white shadow-md"
+          />
         </div>
       </div>
     </li>

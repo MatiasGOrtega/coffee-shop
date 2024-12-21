@@ -40,7 +40,7 @@ function ProductList({
           ))}
       </div>
       {filterProducts !== null && filterProducts.length === 0 && !loading && (
-        <p className="w-full text-center">No hay productos disponibles</p>
+        <p className="text-center w-[800px]">No hay productos disponibles</p>
       )}
     </div>
   );

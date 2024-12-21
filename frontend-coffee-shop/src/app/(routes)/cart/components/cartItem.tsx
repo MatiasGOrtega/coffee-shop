@@ -1,8 +1,9 @@
 import { formatPrice } from "@/lib/formatPrice";
 import { ProductType } from "@/types/product";
-import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import ImageProduct from "@/components/shared/imageProduct";
+import { ButtonExpand, ButtonRemove } from "@/components/buttons";
+import ProductTags from "@/components/shared/productTags";
 
 interface CartItemProps {
   product: ProductType;
@@ -19,35 +20,31 @@ function CartItem({ product, onRemove }: CartItemProps) {
   const productPrice = formatPrice(product.productPrice);
 
   return (
-    <li className="flex border-b py-6">
-      <div className="cursor-pointer" onClick={() => handleClick(product.slug)}>
-        <img
-          src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.productImage[0].url}`}
-          alt={product.productName}
-          className="h-24 w-24 overflow-hidden rounded-md sm:h-32 sm:w-auto"
-        />
-      </div>
-      <div className="flex flex-1 justify-between px-6">
+    <li className="flex w-full lg:w-96 border-b py-6">
+      <ImageProduct
+        imageUrl={product.productImage}
+        className="h-24 w-24 overflow-hidden rounded-md sm:h-32 sm:w-32"
+      />
+
+      <div className="flex flex-1 justify-between pl-6">
         <div>
           <h2 className="text-lg font-bold">{product.productName}</h2>
           <p className="font-bold">{productPrice}</p>
           <div className="flex gap-1 text-sm">
-            <span className="rounded bg-black px-2 py-1 text-white dark:bg-white dark:text-black">
-              {product.productTest}
-            </span>
-            <span className="rounded bg-orange-500 px-2 py-1 text-white">
-              {product.productOrigin}
-            </span>
+            <ProductTags
+              test={product.productTest}
+              origin={product.productOrigin}
+            />
           </div>
         </div>
-      </div>
-      <div className="flex items-center px-6">
-        <button
-          onClick={() => onRemove(product.id)}
-          className="rounded-full p-2 text-red-500 transition-colors hover:bg-red-500 hover:text-white"
-        >
-          <Trash2 size={20} />
-        </button>
+        <div className="flex flex-col items-center gap-1">
+          <ButtonRemove onClick={() => onRemove(product.id)} />
+
+          <ButtonExpand
+            onClick={() => handleClick(product.slug)}
+            className="rounded-full p-2 shadow-md"
+          />
+        </div>
       </div>
     </li>
   );

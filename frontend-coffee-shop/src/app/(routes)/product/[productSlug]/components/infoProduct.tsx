@@ -5,7 +5,7 @@ import { useFavorite } from "@/hooks/useFavorite";
 import { formatPrice } from "@/lib/formatPrice";
 import { ProductType } from "@/types/product";
 import { Heart } from "lucide-react";
-import React from "react";
+import ProductTags from "@/components/shared/productTags";
 
 interface InfoProductProps {
   product: ProductType;
@@ -17,18 +17,15 @@ function InfoProduct({ product }: InfoProductProps) {
   const { addProductFavorite } = useFavorite();
   const { addProduct } = useCart();
 
-
   return (
-    <div className="px-6">
+    <div>
       <div className="mb-3 justify-between sm:flex">
         <h1 className="text-2xl">{product.productName}</h1>
         <div className="flex items-center justify-between gap-3">
-          <span className="w-fit rounded bg-black px-2 py-1 text-xs text-white dark:bg-white dark:text-black">
-            {product.productTest}
-          </span>
-          <span className="w-fit rounded bg-primary px-2 py-1 text-xs text-white">
-            {product.productOrigin}
-          </span>
+          <ProductTags
+            test={product.productTest}
+            origin={product.productOrigin}
+          />
         </div>
       </div>
       <Separator className="my-4" />

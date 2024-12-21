@@ -16,6 +16,8 @@ import { Card, CardContent } from "./ui/card";
 import { ButtonExpand, ButtonShoppingCart } from "./buttons";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
+import ImageProduct from "./shared/imageProduct";
+import ProductTags from "./shared/productTags";
 
 function FeaturedProducts() {
   const { loading, result }: ResponseType = useGetFeaturedProducts();
@@ -38,16 +40,15 @@ function FeaturedProducts() {
               return (
                 <CarouselItem
                   key={product.id}
-                  className="group md:basis-1/2 lg:basis-1/3"
+                  className="md:basis-1/2 lg:basis-1/3"
                 >
                   <Card className="p-3 shadow-md">
                     <CardContent className="relative flex items-center justify-center p-0">
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${product.productImage[0].url}`}
+                      <ImageProduct
+                        imageUrl={product.productImage}
                         className="h-56 w-56 object-cover"
-                        alt="Image featured"
                       />
-                      <div className="absolute bottom-0 w-full transition duration-200 group-hover:opacity-100 sm:opacity-0">
+                      <div className="absolute bottom-0 w-full">
                         <div className="flex justify-end gap-x-5">
                           <ButtonExpand
                             className="block"
@@ -63,20 +64,19 @@ function FeaturedProducts() {
                       <h4 className="text-lg font-semibold">
                         {product.productName}
                       </h4>
-                      <div className="flex gap-1 text-sm">
-                        <span className="rounded bg-black px-2 py-1 text-white dark:bg-white dark:text-black">
-                          {product.productTest}
-                        </span>
-                        <span className="rounded bg-orange-500 px-2 py-1 text-white">
-                          {product.productOrigin}
-                        </span>
-                      </div>
+                      <ProductTags
+                        test={product.productTest}
+                        origin={product.productOrigin}
+                      />
                     </CardContent>
                   </Card>
                 </CarouselItem>
               );
             })}
         </CarouselContent>
+        <div className="py-2 text-center text-gray-500">
+          Deslizar para ver más
+        </div>
         <CarouselPrevious className="hidden sm:flex" />
         <CarouselNext className="hidden sm:flex" />
       </Carousel>

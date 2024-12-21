@@ -11,21 +11,17 @@ function Page() {
   const params = useParams();
   const { productSlug } = params;
   const { result }: ResponseType = useGetProductBySlug(productSlug);
-  const imagesProduct = result && result[0] ? result[0].productImage || [] : [];
+  console.log(result);
 
   if (result === null) {
     return <SkeletonProduct />;
   }
 
   return (
-    <div className="mx-auto max-w-6xl py-4 sm:px-24 sm:py-32">
+    <div className="mx-auto max-w-6xl p-4 sm:px-12 sm:py-24">
       <div className="grid sm:grid-cols-2">
-        <div className="">
-          <CarouselProduct images={imagesProduct} />
-        </div>
-        <div className="sm:px-12">
-          <InfoProduct product={result[0]} />
-        </div>
+        <CarouselProduct images={result[0].productImage} />
+        <InfoProduct product={result[0]} />
       </div>
     </div>
   );

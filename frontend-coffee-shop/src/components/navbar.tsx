@@ -25,7 +25,7 @@ function Navbar() {
   const cart = useCart();
 
   return (
-    <nav className="mx-auto flex cursor-pointer items-center justify-between p-4 sm:max-w-4xl md:max-w-6xl">
+    <nav className="sm:mx-auto flex cursor-pointer items-center justify-between p-2 max-w-6xl gap-2 sm:gap-8">
       <h1 className="text-3xl" onClick={handleClick}>
         Coffe <span className="font-bold">Shop</span>
       </h1>
@@ -35,7 +35,7 @@ function Navbar() {
       <div className="flex sm:hidden">
         <MenuListMobile />
       </div>
-      <div className="flex items-center justify-between gap-2 sm:gap-7">
+      <div className="hidden items-center justify-between gap-2 sm:gap-7 md:flex">
         {cart.products.length === 0 ? (
           <ShoppingCart
             size={24}
@@ -61,10 +61,13 @@ function Navbar() {
           onClick={handleFav}
         />
 
-        <User size={24} strokeWidth="1" className="cursor-pointer transition-colors hover:bg-black hover:stroke-white rounded " />
-
-        <ModeToggle />
+        <User
+          size={24}
+          strokeWidth="1"
+          className="cursor-pointer rounded transition-colors hover:bg-black hover:stroke-white"
+        />
       </div>
+      <ModeToggle />
     </nav>
   );
 }

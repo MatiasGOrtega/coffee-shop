@@ -9,9 +9,16 @@ import {
 import { ButtonExpand, ButtonShoppingCart } from "@/components/buttons";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/lib/formatPrice";
+import { Card, CardContent } from "@/components/ui/card";
+import ProductTags from "@/components/shared/productTags";
+import ImageProduct from "@/components/shared/imageProduct";
+import { useCart } from "@/hooks/useCart";
+import SkeletonSchema from "@/components/skeletonSchema";
 function ProductCard({ product }: { product: ProductType }) {
   const router = useRouter();
   const price = formatPrice(product.productPrice);
+
+  const { addProduct } = useCart();
 
   const handleClick = (slug: string) => {
     router.push(`/product/${slug}`);
@@ -30,35 +37,37 @@ function ProductCard({ product }: { product: ProductType }) {
           {product.productOrigin}
         </p>
       </div>
-      <Carousel
-        opts={{
-          align: "start",
-        }}
-        className="w-full max-w-sm"
-      >
-        <CarouselContent>
-          {product.productImage.map((image) => (
-            <CarouselItem key={image.id} className="group">
-              <img
-                src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${image.url}`}
-                alt="Image product"
-                className="h-56 w-full rounded-xl"
-              />
-              <div className="absolute bottom-1 right-1 w-full transition duration-200 group-hover:opacity-100 sm:opacity-0">
-                <div className="flex justify-end gap-x-3">
-                  <ButtonExpand
-                    className="block"
-                    onClick={() => handleClick(product.slug)}
-                  />
-                  <ButtonShoppingCart onClick={() => console.log("Add Item")} />
-                </div>
-              </div>
-            </CarouselItem>
-          ))}
+      <Carousel>
+        <CarouselContent className="py-0">
+          {product.productImage.map((image) => {
+            return (
+              <CarouselItem key={image.id}>
+                <ImageProduct
+                  imageUrl={product.productImage}
+                  className="h-56 w-56 rounded-lg object-cover"
+                />
+              </CarouselItem>
+            );
+          })}
         </CarouselContent>
       </Carousel>
-      <p className="text-center text-2xl">{product.productName}</p>
-      <p className="text-center font-bold">{price}</p>
+      <div className="absolute bottom-28 left-28 w-full">
+        <div className="flex gap-x-5">
+          <ButtonExpand
+            className="block"
+            onClick={() => handleClick(product.slug)}
+          />
+          <ButtonShoppingCart onClick={() => addProduct(product)} />
+        </div>
+      </div>
+      <div className="py-1">
+        <ProductTags
+          test={product.productTest}
+          origin={product.productOrigin}
+        />
+        <h4 className="text-lg font-semibold">{product.productName}</h4>
+        <p className="font-bold">{price}</p>
+      </div>
     </Link>
   );
 }
