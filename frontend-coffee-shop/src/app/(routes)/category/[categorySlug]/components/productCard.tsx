@@ -1,4 +1,3 @@
-import React from "react";
 import { ProductType } from "@/types/product";
 import Link from "next/link";
 import {
@@ -9,11 +8,10 @@ import {
 import { ButtonExpand, ButtonShoppingCart } from "@/components/buttons";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/lib/formatPrice";
-import { Card, CardContent } from "@/components/ui/card";
 import ProductTags from "@/components/shared/productTags";
 import ImageProduct from "@/components/shared/imageProduct";
 import { useCart } from "@/hooks/useCart";
-import SkeletonSchema from "@/components/skeletonSchema";
+
 function ProductCard({ product }: { product: ProductType }) {
   const router = useRouter();
   const price = formatPrice(product.productPrice);

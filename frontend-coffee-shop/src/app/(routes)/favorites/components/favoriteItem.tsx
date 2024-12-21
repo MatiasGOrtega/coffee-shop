@@ -2,11 +2,8 @@ import React from "react";
 import { ProductType } from "@/types/product";
 import { useRouter } from "next/navigation";
 import { formatPrice } from "@/lib/formatPrice";
-import { Button } from "@/components/ui/button";
 import { useFavorite } from "@/hooks/useFavorite";
 import { useCart } from "@/hooks/useCart";
-import Link from "next/link";
-import { Expand, X } from "lucide-react";
 import {
   ButtonExpand,
   ButtonRemove,
