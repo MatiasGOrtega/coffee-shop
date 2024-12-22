@@ -8,14 +8,12 @@ import ProductList from "./components/productList";
 
 function Page() {
   const { categorySlug } = useParams();
-  const titleCategory =
-    categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1);
-  const { result, loading }: ResponseType = useGetProductCategory(categorySlug);
+  const { result, loading }: ResponseType = useGetProductCategory(categorySlug as string);
 
   return (
     <div className="mx-auto max-w-6xl py-4 sm:px-24 sm:py-16">
       {result !== null && !loading && (
-        <h1 className="text-3xl font-medium">Café {titleCategory}</h1>
+        <h1 className="text-3xl font-medium">Café {categorySlug}</h1>
       )}
       <Separator />
       <ProductList products={result} loading={loading} />

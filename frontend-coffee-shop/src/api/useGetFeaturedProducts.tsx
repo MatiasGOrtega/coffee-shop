@@ -1,6 +1,13 @@
+import { ProductType } from "@/types/product";
 import { useState, useEffect } from "react";
 
-export function useGetFeaturedProducts() {
+interface ResposeTypeFeaturedProduct {
+  result: ProductType[] | null;
+  loading: boolean;
+  error: string;
+}
+
+export function useGetFeaturedProducts(): ResposeTypeFeaturedProduct {
   const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/?filters[productIsFeatured][$eq]=true&populate=*`;
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);

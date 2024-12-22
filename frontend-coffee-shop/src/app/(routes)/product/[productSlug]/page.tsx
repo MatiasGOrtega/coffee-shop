@@ -1,17 +1,17 @@
 "use client";
 import { useGetProductBySlug } from "@/api/products";
-import { ResponseType } from "@/types/response";
 import { useParams } from "next/navigation";
 import React from "react";
 import CarouselProduct from "./components/carouselProduct";
 import SkeletonProduct from "./components/skeletonProduct";
 import InfoProduct from "./components/infoProduct";
 
+
 function Page() {
   const params = useParams();
   const { productSlug } = params;
-  const { result }: ResponseType = useGetProductBySlug(productSlug);
-  console.log(result);
+
+  const { result } = useGetProductBySlug(productSlug);
 
   if (result === null) {
     return <SkeletonProduct />;

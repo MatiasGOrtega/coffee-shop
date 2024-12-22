@@ -1,7 +1,6 @@
 "use client";
 
 import { useGetFeaturedProducts } from "@/api/useGetFeaturedProducts";
-import { ResponseType } from "@/types/response";
 import React from "react";
 import {
   Carousel,
@@ -20,7 +19,7 @@ import ImageProduct from "./shared/imageProduct";
 import ProductTags from "./shared/productTags";
 
 function FeaturedProducts() {
-  const { loading, result }: ResponseType = useGetFeaturedProducts();
+  const { loading, result } = useGetFeaturedProducts();
   const router = useRouter();
 
   const { addProduct } = useCart();
